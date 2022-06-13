@@ -6,14 +6,14 @@ using System.Text;
 
 namespace Sqlite1_1.Model
 {
-    [Table("ActasNacimiento")]
-    public class ActaNacimiento
+    [Table("Telefonos")]
+    public class Telefono
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
-        public DateTime FechaNacimiento { get; set; }
-
+        public string Numero { get; set; }
+        
         [ForeignKey(typeof(Contacto))]
-        public int FKActaNacimientoId { get; set; }
+        public int FKContactoId { get; set; }
     }
 }

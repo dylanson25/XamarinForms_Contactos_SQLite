@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:Sqlite1_1.Model"
              x:Class="Sqlite1_1.View.MattoContacto" 
              Title="Mantenimiento contacto"
              x:Name="this"
@@ -8,7 +8,7 @@
              >
     <ContentPage.Content>
         <StackLayout Margin="10, 10" BindingContext="{Binding Contacto}">
-            <Grid RowSpacing="10" RowDefinitions="auto, auto, auto, auto,auto,auto,auto, *" ColumnDefinitions="auto, *">
+            <Grid RowSpacing="10" RowDefinitions="auto, auto, auto, auto,auto,auto,auto, *, auto" ColumnDefinitions="auto, *">
                 <Image Source="{Binding Avatar}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="150"/>
                 
                 <Label Text="Nombre:" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center"/>
@@ -25,8 +25,31 @@
 
                 <Label Grid.Row="5" Grid.Column="0" Text="Fecha de nacimiento: " />
                 <DatePicker Date="{Binding ActaNacimiento.FechaNacimiento}" Grid.Row="5" Grid.Column="1"/>
+
+                <StackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="End">
+                    <Button Text="+" Command="{Binding BindingContext.cmdAgregaTelefono, Source={x:Reference this}}"  BackgroundColor="LightGreen" TextColor="Black"  HorizontalOptions="End"/>
+                </StackLayout>
+                <CollectionView Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Telefonos}" Margin="65, 5">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Telefono">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="Telefono"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Entry Text="{Binding Numero}"/>
+                                        <Label Text="X"  BackgroundColor="Red" TextColor="Yellow" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" VerticalTextAlignment="Center" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.cmdEliminaTelefono, Source={x:Reference this}}" CommandParameter="{Binding .}" ></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
-            <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="End">
+            <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="End">
                 <Button Text="Cancelar" BackgroundColor="Red" TextColor="White" HorizontalOptions="End"/>
                 <Button Text="Grabar" Command="{Binding BindingContext.cmdGrabaContacto, Source={x:Reference this}}" CommandParameter="{Binding .}" BackgroundColor="Blue" TextColor="White" HorizontalOptions="End"/>
             </StackLayout>

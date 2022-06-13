@@ -35,6 +35,19 @@ namespace Sqlite1_1
             }
         }
 
+        private static TelefonoRepository _TelefonosDb;
+        public static TelefonoRepository TelefonosDb
+        {
+            get
+            {
+                if (_TelefonosDb == null)
+                {
+                    _TelefonosDb = new TelefonoRepository();
+                }
+                return _TelefonosDb;
+            }
+        }
+
         #endregion
 
 
@@ -44,7 +57,9 @@ namespace Sqlite1_1
             InitializeComponent();
             //Siempre crear primero las tablas hijas
             ActaNacimientoDb.Init();
+            TelefonosDb.Init();
             ContactoDb.Init();
+
             MainPage = new NavigationPage(new Inicio());
         }
 

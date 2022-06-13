@@ -33,14 +33,16 @@ namespace Sqlite1_1.Repositories
             }
             else
             {
-                connection.Update(contacto);
-                App.ActaNacimientoDb.InsertOrUpdate(contacto.ActaNacimiento);
+                connection.InsertOrReplaceWithChildren(contacto);
+                //connection.Update(contacto);
+                //App.ActaNacimientoDb.InsertOrUpdate(contacto.ActaNacimiento);
             }
         }
 
         public Contacto GetById(int ID)
         {
-            return connection.Table<Contacto>().FirstOrDefault(item => item.ID == ID);            
+            //return connection.Table<Contacto>().FirstOrDefault(item => item.ID == ID);            
+            return connection.GetAllWithChildren<Contacto>(item => item.ID == ID).FirstOrDefault();            
             
         }
 

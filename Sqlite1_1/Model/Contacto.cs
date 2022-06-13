@@ -2,6 +2,7 @@
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Sqlite1_1.Model
@@ -17,11 +18,10 @@ namespace Sqlite1_1.Model
         public string ApellidoMaterno { get; set; }
         public string email { get; set; }
 
-        [ForeignKey(typeof(ActaNacimiento))]
-        public int FKActaNacimientoId {get; set; }
-
         [OneToOne(CascadeOperations = CascadeOperation.All)]
         public ActaNacimiento ActaNacimiento { get; set; }
-        
+
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public ObservableCollection<Telefono> Telefonos { get; set; }
     }
 }
