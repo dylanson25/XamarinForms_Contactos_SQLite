@@ -29,7 +29,7 @@ namespace Sqlite1_1
             {
                 if (_ActaNacimientoDb == null)
                 {
-                    var actaNacimientoRepository = new ActaNacimientoRepository();
+                    _ActaNacimientoDb = new ActaNacimientoRepository();
                 }
                 return _ActaNacimientoDb;
             }

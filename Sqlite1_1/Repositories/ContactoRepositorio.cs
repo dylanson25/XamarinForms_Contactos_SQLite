@@ -1,8 +1,10 @@
 ﻿using SQLite;
 using Sqlite1_1.Model;
+using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 
@@ -26,11 +28,13 @@ namespace Sqlite1_1.Repositories
         {
             if(contacto.ID == 0)
             {
-                connection.Insert(contacto);
+                connection.InsertWithChildren(contacto);
+                
             }
             else
             {
                 connection.Update(contacto);
+                App.ActaNacimientoDb.InsertOrUpdate(contacto.ActaNacimiento);
             }
         }
 
@@ -42,7 +46,7 @@ namespace Sqlite1_1.Repositories
 
         public List<Contacto> GetAll()
         {
-            return connection.Table<Contacto>().ToList();
+            return connection.GetAllWithChildren<Contacto>().ToList();
         }
         public void DeleteItem(int id)
         {

@@ -13,7 +13,6 @@ namespace Sqlite1_1.ViewModel
 {
     public class InicioViewModel : BaseViewModel
     {
-        private ContactoRepositorio ContactoDb = new ContactoRepositorio();
         public ObservableCollection<Contacto> Contactos { get; set; }
         public ICommand cmdAgregaContacto { get; set; }
         public ICommand cmdModificaContacto { get; set; }
@@ -48,6 +47,8 @@ namespace Sqlite1_1.ViewModel
 
             DateTime generateDate = new DateTime(rndYear, rndMonth, rndDay);
 
+            contacto.ActaNacimiento = new ActaNacimiento() { FechaNacimiento = generateDate };
+
             App.Current.MainPage.Navigation.PushAsync(new MattoContacto(contacto));
         }
 
@@ -56,12 +57,12 @@ namespace Sqlite1_1.ViewModel
             if(Contactos != null)
             {
                 Contactos.Clear();
-                ContactoDb.GetAll()
+                App.ContactoDb.GetAll()
                     .ForEach(item => Contactos.Add(item));
             }
             else
             {
-                Contactos = new ObservableCollection<Contacto>(ContactoDb.GetAll());
+                Contactos = new ObservableCollection<Contacto>(App.ContactoDb.GetAll());
             }
             OnPropertyChanged();
 

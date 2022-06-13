@@ -12,7 +12,6 @@ namespace Sqlite1_1.ViewModel
     {
         public ICommand cmdGrabaContacto { get; set; }
         public Contacto Contacto { get; set; }
-        private ContactoRepositorio ContactoDb = new ContactoRepositorio();
 
         public MttoContactoViewModel(Contacto contacto)
         {
@@ -22,7 +21,7 @@ namespace Sqlite1_1.ViewModel
 
         private void cmdGrabaContactoMetodo(Contacto contacto)
         {
-            ContactoDb.InsertOrUpdate(contacto);
+            App.ContactoDb.InsertOrUpdate(contacto);
             App.Current.MainPage.Navigation.PopAsync();
         }
     }
