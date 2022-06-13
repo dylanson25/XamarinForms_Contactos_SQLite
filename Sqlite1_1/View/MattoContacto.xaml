@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             x:Class="Sqlite1_1.View.MattoContacto"
+             Title="Mantenimiento contacto"
+             x:Name="this"
+             BackgroundColor="LightGray"
+             >
+    <ContentPage.Content>
+        <StackLayout Margin="10, 10" BindingContext="{Binding Contacto}">
+            <Grid RowSpacing="10" RowDefinitions="auto, auto, auto, auto,auto,auto,auto, *" ColumnDefinitions="auto, *">
+                <Image Source="{Binding Avatar}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="150"/>
+                
+                <Label Text="Nombre:" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center"/>
+                <Entry Text="{Binding Nombre}"  Grid.Row="1" Grid.Column="1"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Apellido Paterno:" />
+                <Entry Text="{Binding ApellidoPaterno}" Grid.Row="2" Grid.Column="1"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Apellido Materno:" />
+                <Entry Text="{Binding ApellidoMaterno}" Grid.Row="3" Grid.Column="1"/>
+
+                <Label Grid.Row="4" Grid.Column="0" Text="Email: " />
+                <Entry Text="{Binding email}"  Grid.Row="4" Grid.Column="1"/>
+
+                <Label Grid.Row="5" Grid.Column="0" Text="Fecha de nacimiento: " />
+                <DatePicker Grid.Row="5" Grid.Column="1" Date="{Binding ActaNacimiento.FechaNacimiento}" />
+            </Grid>
+            <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="End">
+                <Button Text="Cancelar" BackgroundColor="Red" TextColor="White" HorizontalOptions="End"/>
+                <Button Text="Grabar" Command="{Binding BindingContext.cmdGrabaContacto, Source={x:Reference this}}" CommandParameter="{Binding .}" BackgroundColor="Blue" TextColor="White" HorizontalOptions="End"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

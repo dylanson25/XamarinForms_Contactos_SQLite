@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:Sqlite1_1.Model" xmlns:system="clr-namespace:System;assembly=netstandard"
+             x:Class="Sqlite1_1.View.Inicio"
+             x:Name="this"
+             BackgroundColor="LightGray"
+             >
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="CONTACTOS" TextColor="White" HorizontalOptions="FillAndExpand"/>
+            <Label  Text="+" TextColor="White" FontSize="Large" Margin="0, 0, 15, 0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding cmdAgregaContacto}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid RowDefinitions="*" ColumnDefinitions="*">
+            <CollectionView ItemsSource="{Binding Contactos}" BackgroundColor="White" Margin="5, 5, 5, 5" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Contacto">
+                        <Grid RowDefinitions="100, auto" ColumnDefinitions="100, *">
+                            <Image Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2" Source="{Binding Avatar}"    HeightRequest="60" WidthRequest="60" Aspect="AspectFit"/>
+                            <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                <Label Margin="0, 15, 0, 0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Nombre:" />
+                                        <Span Text="{x:Static system:Environment.NewLine}" />
+                                        <Span Text="{Binding Nombre}" FontAttributes="Bold" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding ApellidoPaterno}"  FontAttributes="Bold"/>
+                                        <Span Text=" " />
+                                        <Span Text="{Binding ApellidoMaterno}"  FontAttributes="Bold"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                                <Label Text="M" Margin="0, 0, 15, 0" VerticalOptions="Center" FontSize="Large" HorizontalOptions="EndAndExpand" TextColor="Orange" FontAttributes="Bold">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.cmdModificaContacto, Source={x:Reference this}}" CommandParameter="{Binding .}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
