@@ -47,7 +47,31 @@ namespace Sqlite1_1
                 return _TelefonosDb;
             }
         }
+        private static MateriaRepository _materiaDb;
+        public static MateriaRepository MateriasDb
+        {
+            get
+            {
+                if (_materiaDb == null)
+                {
+                    _materiaDb = new MateriaRepository();
+                }
+                return _materiaDb;
+            }
+        }
+        private static ContactosMateriasRepository _contactosMateriasDb;
+        public static ContactosMateriasRepository ContactosMateriasDb
+        {
+            get
+            {
+                if (_contactosMateriasDb == null)
+                {
+                    _contactosMateriasDb = new ContactosMateriasRepository();
+                }
+                return _contactosMateriasDb;
 
+            }
+        }
         #endregion
 
 
@@ -58,6 +82,8 @@ namespace Sqlite1_1
             //Siempre crear primero las tablas hijas
             ActaNacimientoDb.Init();
             TelefonosDb.Init();
+            ContactosMateriasDb.Init();
+            MateriasDb.Init();
             ContactoDb.Init();
 
             MainPage = new NavigationPage(new Inicio());

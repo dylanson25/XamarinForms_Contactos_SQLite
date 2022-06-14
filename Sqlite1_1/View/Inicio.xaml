@@ -36,7 +36,12 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                                <Label Text="M" Margin="0, 0, 15, 0" VerticalOptions="Center" FontSize="Large" HorizontalOptions="EndAndExpand" TextColor="Orange" FontAttributes="Bold">
+                                <Label Text="MM" Margin="0, 0, 15, 0" VerticalOptions="Center" FontSize="Large" HorizontalOptions="EndAndExpand" TextColor="Orange" FontAttributes="Bold">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.cmdMateriasContacto, Source={x:Reference this}}" CommandParameter="{Binding .}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Label Text="MT" Margin="0, 0, 15, 0" VerticalOptions="Center" FontSize="Large" HorizontalOptions="EndAndExpand" TextColor="Orange" FontAttributes="Bold">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding BindingContext.cmdModificaContacto, Source={x:Reference this}}" CommandParameter="{Binding .}"/>
                                     </Label.GestureRecognizers>

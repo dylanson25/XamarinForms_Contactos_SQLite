@@ -16,12 +16,19 @@ namespace Sqlite1_1.ViewModel
         public ObservableCollection<Contacto> Contactos { get; set; }
         public ICommand cmdAgregaContacto { get; set; }
         public ICommand cmdModificaContacto { get; set; }
+        public ICommand cmdMateriasContacto { get; set; }
        
         public InicioViewModel()
         {
             Contactos = new ObservableCollection<Contacto>();
             cmdAgregaContacto = new Command(() => cmdAgregaContactoMetodo());
             cmdModificaContacto = new Command<Contacto>((item) => cmdModificaContactoMetodo(item));
+            cmdMateriasContacto = new Command<Contacto>((item) => cmdMateriasContactoMetodo(item));
+        }
+
+        private void cmdMateriasContactoMetodo(Contacto item)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new MattoContactoMateria(item));
         }
 
         private void cmdModificaContactoMetodo(Contacto contacto)

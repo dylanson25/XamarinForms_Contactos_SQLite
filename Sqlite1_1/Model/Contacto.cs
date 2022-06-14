@@ -23,5 +23,8 @@ namespace Sqlite1_1.Model
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public ObservableCollection<Telefono> Telefonos { get; set; }
+
+        [ManyToMany(typeof(ContactoMateria), CascadeOperations = CascadeOperation.All)]
+        public ObservableCollection<Materia> Materias { get; set; }
     }
 }
